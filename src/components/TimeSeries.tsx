@@ -1,8 +1,11 @@
 import { ChartData, ChartOptions } from "chart.js";
 import LineChart from "./LineChart";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import { Chart } from 'chart.js';
 
 const TimeSeries = () => {
+
+    const chartRef = useRef<Chart | null>(null)
 
     const { labels, randomNumbers } = useMemo(() => {
         const empArray = new Array(50).fill(0)
@@ -22,13 +25,23 @@ const TimeSeries = () => {
     const height = 500;
     const width = 900;
 
-    const data: ChartData<"line"> = {
+    const { gradient } = useMemo(() => {
+        const chart = chartRef.current;
+        const ctx = chart?.ctx;
+        if(!ctx) return { gradient: "" };
 
+        const gradient = ctx.createLinearGradient(0, 0, 0, chart.height);
+        gradient.addColorStop(0, 'hsla(244, 84%, 59%, 1)');
+        gradient.addColorStop(1, 'hsla(229, 28%, 88%, 1)');
+        return { gradient }
+    }, [])
+
+    const data: ChartData<"line"> = {
         labels,
         datasets: [
             {
                 data: randomNumbers,
-                backgroundColor: "linear-gradient(180deg, hsla(244, 84%, 59%, 1) 0%, hsla(229, 28%, 88%, 1) 100%)",
+                backgroundColor: gradient,
                 borderWidth: 1,
                 borderColor: '#4B40EE',
                 fill: true
@@ -67,7 +80,7 @@ const TimeSeries = () => {
         }
     }
 
-    return <LineChart data={data} options={options} height={height} width={width} />
+    return <LineChart ref={chartRef} data={data} options={options} height={height} width={width} />
 };
 
 export default TimeSeries;
