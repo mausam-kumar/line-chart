@@ -1,2 +1,0 @@
-# line-chart
-Line Chart
