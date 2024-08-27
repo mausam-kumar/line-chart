@@ -4,13 +4,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Chart } from 'chart.js';
 import useGetConfig from "../hooks/useGetConfig";
 import colors from "../constant";
-import useGetChartOption from "../hooks/useGetChartOptions";
+import useGetLineChartOption from "../hooks/useGetLineChartOptions";
+import useGetBarChartOptions from "../hooks/useGetBarChartOptions";
+import BarChart from "./BarChart";
 
 const TimeSeries = () => {
     const [gradient, setGradient] = useState<CanvasGradient | string>(colors.voilet1)
     const chartRef = useRef<Chart | null>(null)
     const { labels, randomNumbers, height, width } = useGetConfig()
-    const { options, afterDrawPlugin } = useGetChartOption()
+    const { options, afterDrawPlugin } = useGetLineChartOption()
+    const { options: barChartOptions } = useGetBarChartOptions()
 
     const getGradientColor = useCallback(() => {
         const chart = chartRef.current;
@@ -33,14 +36,27 @@ const TimeSeries = () => {
             {
                 data: randomNumbers,
                 backgroundColor: gradient,
-                borderWidth: 1,
+                borderWidth: 1.5,
                 borderColor: colors.voilet1,
                 fill: true
             },
         ],
     };
 
-    return <div className="relative mt-10 border-b border-x">
+    const barChartData: ChartData<"bar"> = {
+        labels,
+        datasets: [
+            {
+                data: randomNumbers,
+                backgroundColor: "#E2E4E7",
+                borderWidth: 0,
+                borderColor: "#E2E4E7",
+                barThickness: 4
+            },
+        ],
+    }
+
+    return <div className="relative mt-10 border-b border-x pb-2">
         <p className="absolute top-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-black1 font-circularStd" id="hoveredValue"></p>
         <p className="absolute bottom-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-blue1 font-circularStd" id="hoveredValue">{randomNumbers[randomNumbers.length - 1]}</p>
         <LineChart ref={chartRef}
@@ -50,6 +66,7 @@ const TimeSeries = () => {
             width={width}
             plugins={[afterDrawPlugin]}
         />
+        <BarChart data={barChartData} options={barChartOptions} height={50} width={width} />
     </div>
 };
 

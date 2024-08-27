@@ -3,7 +3,7 @@ import { ChartOptions, Plugin, TooltipModel } from "chart.js";
 import { dataSetLength } from "./useGetConfig";
 import { addCommas } from "../utils";
 
-const useGetChartOption = () => {
+const useGetLineChartOption = () => {
     const totalDuration = 1000;
     const delayBetweenPoints = totalDuration / dataSetLength;
     const previousY = (ctx: any) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
@@ -159,4 +159,4 @@ const useGetChartOption = () => {
     return { options, afterDrawPlugin }
 }
 
-export default useGetChartOption
+export default useGetLineChartOption

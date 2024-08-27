@@ -34,7 +34,7 @@ const Menu = () => {
 
 export const DateRange = () => {
 
-    return <div className="flex justify-end w-full gap-x-4 mt-8">
+    return <div className="flex justify-end w-full gap-x-6 mt-8">
         {
             format.map((label) => {
                 return <MenuItem
