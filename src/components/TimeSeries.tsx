@@ -40,13 +40,17 @@ const TimeSeries = () => {
         ],
     };
 
-    return <LineChart ref={chartRef}
-        data={data}
-        options={options}
-        height={height}
-        width={width}
-        plugins={[afterDrawPlugin]}
-    />
+    return <div className="relative">
+        <p className="absolute top-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-black1 font-circularStd" id="hoveredValue"></p>
+        <p className="absolute bottom-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-blue1 font-circularStd" id="hoveredValue">{randomNumbers[randomNumbers.length - 1]}</p>
+        <LineChart ref={chartRef}
+            data={data}
+            options={options}
+            height={height}
+            width={width}
+            plugins={[afterDrawPlugin]}
+        />
+    </div>
 };
 
 export default TimeSeries;

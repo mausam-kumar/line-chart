@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className='flex justify-center w-full'>
-      <div className='border w-fit p-4'>
+      <div className='border w-fit'>
         <Price />
         <Menu />
         <RegisterChartComponent>

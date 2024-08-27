@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChartOptions, Plugin, TooltipModel } from "chart.js";
 import { dataSetLength } from "./useGetConfig";
+import { addCommas } from "../utils";
 
 const useGetChartOption = () => {
-    const totalDuration = 3000;
+    const totalDuration = 1000;
     const delayBetweenPoints = totalDuration / dataSetLength;
     const previousY = (ctx: any) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
 
@@ -103,7 +104,7 @@ const useGetChartOption = () => {
                 display: false,
             },
             tooltip: {
-                enabled: true,
+                enabled: false,
                 mode: 'nearest',
                 intersect: false,
                 backgroundColor: '#1A243A',
@@ -116,25 +117,43 @@ const useGetChartOption = () => {
                 cornerRadius: 4,
                 callbacks: {
                     label: function (context) {
-                      return `${context.parsed.y}`;
+                        return `${context.parsed.y}`;
                     },
                     labelColor: function () {
-                      return {
-                        borderColor: 'transparent', // Ensure no border is shown
-                        backgroundColor: 'transparent' // Ensure no background is shown
-                      };
+                        return {
+                            borderColor: 'transparent',
+                            backgroundColor: 'transparent'
+                        };
                     },
-                  },
+                },
                 titleFont: {
-                    family: 'CircularStd', // Custom font family
-                    size: 0, // Custom font size for title
+                    family: 'CircularStd',
+                    size: 0,
                 },
                 bodyFont: {
-                    family: 'CircularStd', // Custom font family
-                    size: 18, // Custom font size for body
+                    family: 'CircularStd',
+                    size: 18,
                 },
             },
         },
+
+        onHover: (event, _elements, chart) => {
+            if (event.native) {
+                const elementsAtEvent = chart.getElementsAtEventForMode(event.native, 'nearest', { intersect: false }, true);
+
+                if (elementsAtEvent.length) {
+                    const firstElement = elementsAtEvent[0];
+                    const datasetIndex = firstElement.datasetIndex;
+                    const index = firstElement.index;
+                    const value = chart.data.datasets[datasetIndex].data[index];
+                    const labelElement = document.getElementById('hoveredValue')!
+                    labelElement.innerText = `${addCommas(Number(value))}`;
+                } else {
+                    const labelElement = document.getElementById('hoveredValue')!
+                    labelElement.innerText = '';
+                }
+            }
+        }
     }
 
     return { options, afterDrawPlugin }

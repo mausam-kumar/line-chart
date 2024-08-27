@@ -10,8 +10,8 @@ const useGetConfig = () => {
         }, [])
 
         const randomNumbers = empArray.reduce((acc) => {
-            const min = 1000
-            const max = 5000
+            const min = 10000
+            const max = 50000
             const val = Math.floor(Math.random() * (max - min + 1)) + min
             return [...acc, val]
         }, [])
