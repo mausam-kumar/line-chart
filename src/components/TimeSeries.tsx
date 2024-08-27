@@ -2,13 +2,15 @@ import { ChartData } from "chart.js";
 import LineChart from "./LineChart";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Chart } from 'chart.js';
-import useGetConfig, { options } from "../hooks/useGetConfig";
+import useGetConfig from "../hooks/useGetConfig";
 import colors from "../constant";
+import useGetChartOption from "../hooks/useGetChartOptions";
 
 const TimeSeries = () => {
     const { labels, randomNumbers, height, width } = useGetConfig()
-    const [ gradient, setGradient ] = useState<CanvasGradient | string>(colors.voilet1)
+    const [gradient, setGradient] = useState<CanvasGradient | string>(colors.voilet1)
     const chartRef = useRef<Chart | null>(null)
+    const { options } = useGetChartOption()
 
     const getGradientColor = useCallback(() => {
         const chart = chartRef.current;

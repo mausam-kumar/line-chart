@@ -1,42 +1,10 @@
-import { ChartOptions } from "chart.js";
 import { useMemo } from "react";
 
-export const options: ChartOptions<"line"> = {
-    responsive: true,
-    plugins: {
-        legend: {
-            display: false
-        },
-        title: {
-            display: false,
-        }
-    },
-    elements: {
-        point: {
-            radius: 0
-        }
-    },
-    scales: {
-        x: {
-            grid: {
-                display: false,
-            },
-            display: false
-        },
-        y: {
-            grid: {
-                display: false,
-            },
-            display: false
-        }
-    }
-}
-
-
+export const dataSetLength = 40;
 const useGetConfig = () => {
 
     const { labels, randomNumbers } = useMemo(() => {
-        const empArray = new Array(40).fill(0)
+        const empArray = new Array(dataSetLength).fill(0)
         const labels = empArray.reduce((acc, ele, index) => {
             return [...acc, index + ele]
         }, [])
