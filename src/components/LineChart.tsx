@@ -12,7 +12,7 @@ type LineChartProps = {
 
 const LineChart = forwardRef(function LineChart(props: LineChartProps, ref: any){
     const { width, height, options, data } = props
-    console.log(ref, "ref")
+
     return <div className="overflow-hidden">
         <div style={{ width }}>
             <Line

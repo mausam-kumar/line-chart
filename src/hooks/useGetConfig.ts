@@ -36,7 +36,7 @@ export const options: ChartOptions<"line"> = {
 const useGetConfig = () => {
 
     const { labels, randomNumbers } = useMemo(() => {
-        const empArray = new Array(50).fill(0)
+        const empArray = new Array(40).fill(0)
         const labels = empArray.reduce((acc, ele, index) => {
             return [...acc, index + ele]
         }, [])
@@ -50,8 +50,8 @@ const useGetConfig = () => {
         return { labels, randomNumbers }
     }, [])
 
-    const height = 500;
-    const width = 900;
+    const height = 300;
+    const width = 600;
 
     return { labels, randomNumbers, height, width }
 };
