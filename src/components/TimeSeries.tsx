@@ -36,7 +36,7 @@ const TimeSeries = () => {
             {
                 data: randomNumbers,
                 backgroundColor: gradient,
-                borderWidth: 1.5,
+                borderWidth: 1.2,
                 borderColor: colors.voilet1,
                 fill: true
             },
@@ -57,8 +57,8 @@ const TimeSeries = () => {
     }
 
     return <div className="relative mt-10 border-b border-x pb-2">
-        <p className="absolute top-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-black1 font-circularStd" id="hoveredValue"></p>
-        <p className="absolute bottom-1/4 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-blue1 font-circularStd" id="hoveredValue">{randomNumbers[randomNumbers.length - 1]}</p>
+        <p className="absolute top-1/4 w-20 text-center -right-16 z-10 text-white rounded-md leading-10 text-lg bg-black1 font-circularStd" id="hoveredValue"></p>
+        <p className="absolute bottom-1/3 w-20 text-center -right-16 z-10 text-white rounded-md px-2 py-1 text-lg bg-blue1 font-circularStd" id="hoveredValue">{randomNumbers[randomNumbers.length - 1]}</p>
         <LineChart ref={chartRef}
             data={data}
             options={options}
