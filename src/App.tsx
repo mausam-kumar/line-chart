@@ -1,5 +1,5 @@
 import './App.css'
-import Menu from './components/Menu'
+import Menu, { DateRange } from './components/Menu'
 import Price from './components/Price'
 import RegisterChartComponent from './components/RegisterChartComponent'
 import TimeSeries from './components/TimeSeries'
@@ -7,10 +7,11 @@ import TimeSeries from './components/TimeSeries'
 function App() {
 
   return (
-    <div className='flex justify-center w-full'>
-      <div className='border w-fit'>
+    <div className='flex justify-center w-full py-4'>
+      <div className='w-fit'>
         <Price />
         <Menu />
+        <DateRange />
         <RegisterChartComponent>
           <TimeSeries />
         </RegisterChartComponent>

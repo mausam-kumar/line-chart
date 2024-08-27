@@ -87,7 +87,7 @@ const useGetChartOption = () => {
                 grid: {
                     display: false,
                 },
-                display: false,
+                display: false
             },
             y: {
                 grid: {

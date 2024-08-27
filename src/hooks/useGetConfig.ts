@@ -19,7 +19,7 @@ const useGetConfig = () => {
     }, [])
 
     const height = 300;
-    const width = 600;
+    const width = 700;
 
     return { labels, randomNumbers, height, width }
 };
