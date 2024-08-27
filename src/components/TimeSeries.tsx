@@ -7,10 +7,10 @@ import colors from "../constant";
 import useGetChartOption from "../hooks/useGetChartOptions";
 
 const TimeSeries = () => {
-    const { labels, randomNumbers, height, width } = useGetConfig()
     const [gradient, setGradient] = useState<CanvasGradient | string>(colors.voilet1)
     const chartRef = useRef<Chart | null>(null)
-    const { options } = useGetChartOption()
+    const { labels, randomNumbers, height, width } = useGetConfig()
+    const { options, afterDrawPlugin } = useGetChartOption()
 
     const getGradientColor = useCallback(() => {
         const chart = chartRef.current;
@@ -40,11 +40,27 @@ const TimeSeries = () => {
         ],
     };
 
-    return <LineChart ref={chartRef}
-        data={data}
-        options={options}
-        height={height}
-        width={width} />
+    return <div
+        // onMouseMove={(e) => {
+        //     const chart = chartRef.current
+        //     if (chart) {
+        //         const rect = chart.canvas.getBoundingClientRect();
+        //         setMousePosition({
+        //             x: e.clientX - rect.left,
+        //             y: e.clientY - rect.top,
+        //         });
+        //     }
+        // }}
+        // onMouseLeave={() => setMousePosition(null)}
+    >
+        <LineChart ref={chartRef}
+            data={data}
+            options={options}
+            height={height}
+            width={width}
+            plugins={[afterDrawPlugin]}
+        />
+    </div>
 };
 
 export default TimeSeries;

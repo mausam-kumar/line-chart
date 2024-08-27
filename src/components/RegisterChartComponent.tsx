@@ -9,7 +9,8 @@ import {
     scales,
     PointElement,
     LineElement,
-    Filler
+    Filler,
+    plugins as ChartJsPlugin
 } from "chart.js";
 import { ReactNode } from "react";
 
@@ -23,7 +24,8 @@ ChartJS.register(
     scales,
     PointElement,
     LineElement,
-    Filler
+    Filler,
+    ChartJsPlugin
 );
 
 const RegisterChartComponent = ({ children }: { children: ReactNode }) => {
